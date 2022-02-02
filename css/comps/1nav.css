@@ -1,0 +1,12 @@
+.nav {
+    position: fixed;   
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    border: 2px solid gray;
+}
+.nav input[type=text]:focus {
+    outline: none;
+}
+

@@ -1,0 +1,63 @@
+.container {
+    margin-top: 11%;    
+}
+.nav {
+    z-index: 100;
+}
+
+.blog-comment {
+    display: grid;
+    justify-items: left;
+}
+.blog-comment--item {
+    border-bottom: 2px solid #efefef;
+    padding-bottom: 5%;
+    margin-top: 2%;
+}
+.blog-comment--item p {
+    margin-top: 3%;
+    line-height: 1.2em;
+    font-size: 16px;
+}
+.blog-comment img {
+    width: 64px;
+    height: 64px;
+    margin-right: 5%;
+}
+.blog-comment--item div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+.blog-comment--count{
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+.blog-comment--item div {
+    width: 20%;
+}
+
+.blog-comment--leave{
+    margin-top: 5%;
+    display: grid;
+    justify-items: left;
+}
+.blog-comment--leave textarea{
+    resize: none;
+    border: 1px solid #efefef;
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: bold;
+    padding-top: 2%;
+    padding-left: 2%;
+    width: 90%;
+}
+.blog-comment--leave button {
+    border: none;
+    border-radius: 4px;
+    background-color: #00A2DC;
+    padding: 2%;
+    color: white;
+    margin-top: 2%;
+}
