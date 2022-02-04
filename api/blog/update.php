@@ -2,6 +2,8 @@
     include "../../config/db.php";
     include "../../config/base_url.php";
 
+    session_start();
+
     if(isset($_POST["title"]) && strlen($_POST["description"]) > 0 && 
     isset($_POST["description"]) && strlen($_POST["title"]) > 0 &&
     isset($_GET["id"]) &&
@@ -27,18 +29,18 @@
 
             
             $path = "/img/blogs/".$image_name ;
-            $prep = mysqli_prepare($con, "UPDATE blogs set  title=?, description=?,img=? where id=$id");
+            $prep = mysqli_prepare($con, "UPDATE blogs set  title=?, description=?,img=? where id=$id"." AND author_id=".$_SESSION["user_id"]);
             mysqli_stmt_bind_param($prep,"sss", $title, $desc,$path);
             mysqli_stmt_execute($prep);
         }
         else{
-            $prep = mysqli_prepare($con, "UPDATE blogs set  title=?, description=? where id=$id");
+            $prep = mysqli_prepare($con, "UPDATE blogs set  title=?, description=? where id=$id"." AND author_id=".$_SESSION["user_id"]);
             mysqli_stmt_bind_param($prep,"ss", $title, $desc );
             mysqli_stmt_execute($prep);
         }
         
 
-        header("Location: $BASE_URL/profile.php");
+        header("Location: $BASE_URL/profile.php?nickname=".$_SESSION["nickname"]);
     }else{
         header("Location: $BASE_URL/editblog.php?id=".$_GET["id"]."&error=3");
     }

@@ -8,6 +8,9 @@
         $title = $_POST["title"];
         $desc = $_POST["description"];
         
+        session_start();
+        $user_id = $_SESSION["user_id"];
+
         if(isset($_FILES["image"]) && isset($_FILES["image"]["name"]) && strlen($_FILES["image"]["name"]) > 0) {
             $ext = end(explode(".",$_FILES["image"]["name"]));
             $image_name = time().".".$ext;
@@ -15,13 +18,13 @@
 
             
             $path = "/img/blogs/".$image_name ;
-            $prep = mysqli_prepare($con, "INSERT INTO blogs ( title, description,img ) VALUES (?,?, ? )");
-            mysqli_stmt_bind_param($prep,"sss", $title, $desc,$path);
+            $prep = mysqli_prepare($con, "INSERT INTO blogs ( title, description,img, author_id ) VALUES (?,?, ?,? )");
+            mysqli_stmt_bind_param($prep,"sssi", $title, $desc,$path, $user_id);
             mysqli_stmt_execute($prep);
         }
         else{
-            $prep = mysqli_prepare($con, "INSERT INTO blogs ( title, description ) VALUES (?,? )");
-            mysqli_stmt_bind_param($prep,"ss", $title, $desc );
+            $prep = mysqli_prepare($con, "INSERT INTO blogs ( title, description,author_id ) VALUES (?,?,? )");
+            mysqli_stmt_bind_param($prep,"ssi", $title, $desc, $user_id );
             mysqli_stmt_execute($prep);
         }
         

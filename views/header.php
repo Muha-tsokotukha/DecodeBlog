@@ -1,7 +1,9 @@
 <div class="nav">
             
         <div class="nav-logo">
-            Decode Blog
+            <a href="<?=$BASE_URL?>/index.php" STYLE="text-decoration:none;color:inherit;">
+                Decode Blog
+            </a>
         </div>
 
         <div class="nav-search">
@@ -19,8 +21,10 @@
             if(isset($_SESSION["user_id"]))
             {
         ?>
-        <div class="nav-auth">
-            <img src="img/avatar.png" alt="">
+        <div class="nav-auth" >
+            <a href="<?=$BASE_URL?>/profile.php?nickname=<?=$_SESSION['nickname']?>" style="background-color: inherit;border: none;"  >
+                <img src="img/avatar.png" alt="">
+            </a>
         </div>
         <?php 
             }

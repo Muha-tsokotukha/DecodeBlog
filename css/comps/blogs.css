@@ -93,3 +93,6 @@ body {
 .blog .blog-image {
 
 }
+.topic {
+    display: grid;
+}

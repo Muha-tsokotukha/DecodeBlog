@@ -8,7 +8,7 @@
         $pass=$_POST["password"];
         $hash = sha1($pass);
 
-        $prep = mysqli_prepare($con, "SELECT id FROM users WHERE email=? AND password=?");
+        $prep = mysqli_prepare($con, "SELECT id,nickname FROM users WHERE email=? AND password=?");
         mysqli_stmt_bind_param($prep, "ss", $email, $hash);
         mysqli_stmt_execute($prep);
         
@@ -22,8 +22,9 @@
         $row = mysqli_fetch_assoc($query);
         session_start();
         $_SESSION["user_id"] = $row["id"];
+        $_SESSION["nickname"] = $row["nickname"];
 
-        header("Location: $BASE_URL/profile.php");
+        header("Location: $BASE_URL/profile.php?nickname=".$row["nickname"]);
         
     }
     else{

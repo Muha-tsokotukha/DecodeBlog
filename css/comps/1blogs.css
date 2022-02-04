@@ -47,3 +47,6 @@ body {
 .blog p {
     line-height: 1.3em;
 }
+.topic {
+    display: grid;
+}
