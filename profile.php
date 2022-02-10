@@ -1,131 +1,120 @@
-<?php include "config/db.php"; 
-    
+<?php 
+	include "config/db.php";
+	include "common/time_ago.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php  include "views/head.php";
-            include "common/time_ago.php";
-    
-            // session_start();
-            // if(!$_SESSION["user_id"]){
-            // header("Location: $BASE_URL/mainPage.php");
-            // }
-    ?>
+	<title>Профиль</title>
+	<?php 
+	include "views/head.php"; 
+	if(!isset($_SESSION["user_id"])) {
+		header("Location: $BASE_URL");
+		exit();
+	}
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Decode Blog</title>
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/comps/blogs.css">
-    <link rel="stylesheet" href="css/comps/categs.css">
-    <link rel="stylesheet" href="css/comps/nav.css">
-
-    
+	?>
 </head>
 <body>
 
-    <?php include "views/header.php";?>
-    
+<?php  
+	include "views/header.php";
+?>
 
-    <div class="container">
-        
-        <?php 
-            if(isset($_SESSION["nickname"]) && $_SESSION["nickname"]==$_GET["nickname"] ){          
-        ?>
+<section class="container page">
+	<div class="page-content">
+		<div class="page-header">
+			<h2>Мои блоги</h2>
+			<a class="button" href="<?=$BASE_URL ?>/newblog.php">Новый блог</a>
+		</div>
 
-        <div class="topic">
-            <h1>Мои блоги</h1>
-            <a href="<?=$BASE_URL ?>/newBlog.php">Новый блог</a>    
-        </div>  
-        <?php }
-            else{
+		<div class="blogs">
 
-        ?>
-        <div class="topic">
-            <h1>Блог <?=$_GET["nickname"]?></h1>    
-        </div>  
-        <?php }?>
+<?php
 
-        
-        <?php
-                $nickname = $_GET["nickname"];
-                $query = mysqli_query($con, "SELECT b.* , u.nickname FROM blogs b LEFT OUTER JOIN users u on b.author_id=u.id WHERE u.nickname="."'$nickname'");
+		$nickname = $_GET["nickname"];
+		$query = mysqli_query($con, "SELECT b.*, u.nickname, c.name FROM blogs b LEFT OUTER JOIN users u ON b.author_id=u.id LEFT OUTER JOIN categories c ON b.category_id=c.id WHERE u.nickname='$nickname'");
 
-                if( mysqli_num_rows($query) > 0 ){
-                    while($row = mysqli_fetch_assoc($query) ){
+		if(mysqli_num_rows($query) > 0) {
+			while($row = mysqli_fetch_assoc($query)) {
+?>
 
-                    
-        ?>
-        <!-- Getting blog posts -->
-        <div class="blog">
-            
-            
-            
-            <img class="blog-image" src="<?php echo $BASE_URL.$row["img"]; ?>" alt="">
-            <div class="blog-edit">
-                <h3> <?= $row["title"]  // these are php ?>   </h3>
-                <?php 
-                    if( isset($_SESSION["user_id"]) && $_SESSION["user_id"]== $row["author_id"]){
+			<div class="blog-item">
+				<img class="blog-item--img" src="<?php echo $BASE_URL.$row["img"]; ?>" alt="">
+				<div class="blog-header">
+					<h3><?=$row["title"]?></h3>
 
-                ?>
-                <span class="blog-edit--dots">&#65049;</span> 
-                <ul>
-                    <li><a href="<?=$BASE_URL?>/editblog.php?id=<?=$row["id"]?>">Редактировать</a></li>
-                    <li ><a style="color: red;" href="<?=$BASE_URL?>/api/blog/delete.php?id=<?=$row["id"]?>">Удалить</a></li>
-                </ul>
-                <?php 
-                    }
-                ?>
-            </div>
-            <p>  <?= $row["description"] // these are php ?> </p>
-            <div class="blog-info">
+					<?php
+						if($_SESSION["user_id"] == $row["author_id"]) {
+					?>
+					<span class="link">
+						<img src="<?=$BASE_URL; ?>/images/dots.svg" alt="">
+						Еще
 
-                <div class="blog-info--date">
-                    <img src="img/calendar.png" alt="">
-                    <?php echo to_time_ago(strtotime($row["date"])); ?>
-                    
-                </div>
-                <div class="blog-info--views">
-                    <img src="img/eye.png" alt="">
-                    21
-                </div>
-                <div class="blog-info--comments">
-                    <img src="img/Shape.png" alt="">
-                    4
-                </div>
-                <!-- <div class="blog-info--topic"></div> -->
-                <div class="blog-info--author">
-                    <img src="img/author.png" alt="">
-                    <?php echo $nickname;?>
-                </div>
+						<ul class="dropdown">
+							<li> <a href="<?=$BASE_URL ?>/editblog.php?id=<?=$row["id"] ?>">Редактировать</a> </li>
+							<li><a href="<?=$BASE_URL ?>/api/blog/delete.php?id=<?=$row["id"] ?>" class="danger">Удалить</a></li>
+						</ul>
+					</span>
 
-            </div>
-            
-        </div>
-        <?php 
-                    }
-                }else{ 
-        ?>        
-            <h5>No blogs yet!</h5>  
-        <?php 
-                } 
-        ?>        
+					<?php
+						}
+					?>
 
-    </div>
+				</div>
+				<p class="blog-desc">
+				<?=$row["description"]?>
+				</p>
 
-    <section class="categories">
-        <img src="img/avatar.png" alt="">
-        <h4>Елнур Сеитжанов</h4>
-        <p>В основном пишу про веб-разработку на React & Redux </p>
-        <p>285 постов за все время</p>
+				<div class="blog-info">
+					<span class="link">
+						<img src="<?=$BASE_URL; ?>/images/date.svg" alt="">
+						<?php echo to_time_ago(strtotime($row["date"])); ?>
+					</span>
+					<span class="link">
+						<img src="<?=$BASE_URL; ?>/images/visibility.svg" alt="">
+						21
+					</span>
+					<a class="link">
+						<img src="<?=$BASE_URL; ?>/images/message.svg" alt="">
+						4
+					</a>
+					<span class="link">
+						<img src="<?=$BASE_URL; ?>/images/forums.svg" alt="">
+						<?=$row["name"] ?>
+					</span>
+					<a class="link">
+						<img src="<?=$BASE_URL; ?>/images/person.svg" alt="">
+						<?=$row["nickname"] ?>
+					</a>
+				</div>
+			</div>
+			<?php
+			}
+		} else {
+			?>
 
-        <button>  <!-- maybe should use a -->
-            Редактировать  
-        </button>
+			<h1>0 blogs</h1>
 
-        <button class="button-danger"><a href="api/user/signout.php" >Выйти</a></button>
-    </section>
+<?php
+		}
+?>
+
+		</div>
+	</div>
+	<div class="page-info">
+		<div class="user-profile">
+			<img class="user-profile--ava" src="<?=$BASE_URL; ?>/images/avatar.png" alt="">
+
+			<h1>Елнур Сеитжанов</h1>
+			<h2>В основном пишу про веб - разработку, на React & Redux</h2>
+			<p>285 постов за все время</p>
+			<a href="" class="button">Редактировать</a>
+
+			<a href="api/user/signout.php" class="button button-danger">Выход</a>
+		</div>
+	</div>
+</section>	
 </body>
-
 </html>

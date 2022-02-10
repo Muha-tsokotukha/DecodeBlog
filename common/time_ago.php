@@ -32,7 +32,4 @@ function to_time_ago( $time ) {
     }
 }
   
-// to_time_ago() function call
-// echo to_time_ago( time() - 5);
-  
 ?>

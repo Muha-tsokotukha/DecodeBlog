@@ -1,11 +1,15 @@
 <?php
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 
-    $con = mysqli_connect("localhost", "root","just2good2betrue","decodeblog" );
+	date_default_timezone_set('Asia/Almaty');
 
-    if( mysqli_connect_errno() ){
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit();
-    }
+    $con = mysqli_connect("localhost", "root", "just2good2betrue", "decodeblog");
 
-    
+    if(mysqli_connect_errno()) {
+		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		exit();
+	}
+
 ?>

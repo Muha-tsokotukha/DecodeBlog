@@ -1,44 +1,33 @@
-<div class="nav">
-            
-        <div class="nav-logo">
-            <a href="<?=$BASE_URL?>/index.php" STYLE="text-decoration:none;color:inherit;">
-                Decode Blog
-            </a>
+<header class="header container">
+	<div class="header-logo">
+	    <a href="<?=$BASE_URL; ?>/index.php">Decode Blog</a>	
+	</div>
+	<div class="header-search">
+		<input type="text" class="input-search" placeholder="Поиск по блогам">
+		<button class="button button-search">
+			<img src="<?=$BASE_URL; ?>/images/search.svg" alt="">	
+			Найти
+		</button>
+	</div>
+	<div>
+	<?php
+		
+		if(isset($_SESSION["user_id"])) {
+	?>
+        <a href="<?=$BASE_URL; ?>/profile.php?nickname=<?=$_SESSION["nickname"]?>">
+            <img class="avatar" src="<?=$BASE_URL; ?>/images/avatar.png" alt="Avatar">
+        </a>
+
+		<?php
+		} else {
+		?>
+        <div class="button-group">
+            <a href="<?=$BASE_URL; ?>/register.php" class="button">Регистрация</a>
+            <a href="<?=$BASE_URL; ?>/login.php" class="button">Вход</a>
         </div>
 
-        <div class="nav-search">
-            <input class="nav-search--bar" placeholder="Поиск по блогам">
-            </input>
-            <div class="nav-search--search">
-                <img src="img/search.png" alt="search">
-                Найти
-            </div>
-        </div>
-
-        <?php 
-        
-            
-            if(isset($_SESSION["user_id"]))
-            {
-        ?>
-        <div class="nav-auth" >
-            <a href="<?=$BASE_URL?>/profile.php?nickname=<?=$_SESSION['nickname']?>" style="background-color: inherit;border: none;"  >
-                <img src="img/avatar.png" alt="">
-            </a>
-        </div>
-        <?php 
-            }
-            else{
-        ?>
-
-        <div class="nav-auth">
-                <a href="reg.php">Регистрация</a>
-                <a href="login.php">Вход</a>
-        </div>
-        
-        <?php 
-            }
-        ?>
-
-        
-</div>
+		<?php
+		}
+		?>
+	</div>
+</header>
