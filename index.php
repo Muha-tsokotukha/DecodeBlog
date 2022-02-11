@@ -1,6 +1,36 @@
 <?php
 	include "config/db.php";
 	include "common/time_ago.php";
+	$limit = 3;
+	$sql = "SELECT b.*, u.nickname, c.name FROM blogs b LEFT OUTER JOIN users u ON b.author_id=u.id LEFT OUTER JOIN categories c ON b.category_id=c.id";
+	
+	$sql_count =  "SELECT CEIL(COUNT(*)/$limit) as total FROM blogs";
+
+	$category = null;
+	if(isset($_GET["category_id"]) && intval($_GET["category_id"])) {
+		$sql .= " WHERE b.category_id=".$_GET["category_id"];
+		$sql_count .= " WHERE category_id=".$_GET["category_id"];
+		$category = $_GET["category_id"];
+	}
+	
+	
+	$page = 1; 
+	
+
+	if(isset($_GET["page"]) && intval($_GET["page"])){
+		$skip = ($_GET['page'] - 1) * $limit;
+		$sql .= " LIMIT $skip,$limit ";
+		$page = $_GET['page']; 
+	}else{
+		$sql .= " LIMIT $limit";
+	}
+	$query_count = mysqli_query($con, $sql_count);
+	$count = mysqli_fetch_assoc($query_count);
+	
+
+	$query = mysqli_query($con, $sql);
+
+	
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +52,7 @@
 
 			<?php
 
-				$sql = "SELECT b.*, u.nickname, c.name FROM blogs b LEFT OUTER JOIN users u ON b.author_id=u.id LEFT OUTER JOIN categories c ON b.category_id=c.id";
-				if(isset($_GET["category_id"]) && intval($_GET["category_id"])) {
-					$sql .= " WHERE b.category_id=".$_GET["category_id"];
-				}
-				$query = mysqli_query($con, $sql);
-
+				
 				if(mysqli_num_rows($query) > 0) {
 					while($row = mysqli_fetch_assoc($query)) {
 
@@ -79,7 +104,28 @@
 				}
 			?>
 
+		<?php  
 
+			$cat_str = "";
+			if($category){
+				$cat_str = "&category_id=$category";
+			}
+
+
+			if( $page != 1 ){
+
+				echo "<a class='pagination-item' href='?page=" . ($page - 1) . "$cat_str' > Prev</a>";
+			}
+
+			for($i = 1; $i <= $count["total"]; $i++ ){
+				echo "<a class='pagination-item' href='?page=$i$cat_str' >".$i. "</a>";
+
+			}
+			if( $page != $count['total']  )
+			echo "<a class='pagination-item' href='?page=" . ($page + 1 ). "$cat_str' > Next</a>";
+			
+
+		?>
 
 		</div>
 	</div>
