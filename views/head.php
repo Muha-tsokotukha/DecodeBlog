@@ -8,4 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style/all.css">
+<link rel="stylesheet" href="<?=$BASE_URL ?>/style/all.css">
+
+<script>
+    <?php 
+        if( isset($_SESSION["user_id"]) ){ ?>
+            localStorage.setItem("user_id", <?=$_SESSION["user_id"]?> );
+        <?php }
+        else{
+        ?>
+            if(localStorage.getItem("user_id"))localStorage.removeItem("user_id");
+        <?php }?>
+</script>

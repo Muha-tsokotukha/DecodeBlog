@@ -1,6 +1,7 @@
 <?php
 	include "config/db.php";
 	include "common/time_ago.php";
+	
 	$limit = 3;
 	$sql = "SELECT b.*, u.nickname, c.name FROM blogs b LEFT OUTER JOIN users u ON b.author_id=u.id LEFT OUTER JOIN categories c ON b.category_id=c.id";
 	
@@ -82,7 +83,7 @@
 			<div class="blog-item">
 				<img class="blog-item--img" src="<?=$BASE_URL; ?>/<?=$row["img"]; ?>" alt="">
 				<div class="blog-header">
-					<h3><?=$row["title"]; ?></h3>
+					<h3><a href="blog-details.php/?id=<?=$row["id"]?>"><?=$row["title"]; ?></a></h3>
 				</div>
 				<p class="blog-desc">
 					<?=$row["description"]; ?>
@@ -95,11 +96,11 @@
 					</span>
 					<span class="link">
 						<img src="<?=$BASE_URL; ?>/images/visibility.svg" alt="">
-						21
+						<?=$row["view"]?>
 					</span>
 					<a class="link">
 						<img src="<?=$BASE_URL; ?>/images/message.svg" alt="">
-						4
+						<?=mysqli_num_rows(mysqli_query($con, "SELECT id FROM comments WHERE blog_id=".$row["id"]))?>
 					</a>
 					<span class="link">
 						<img src="<?=$BASE_URL; ?>/images/forums.svg" alt="">

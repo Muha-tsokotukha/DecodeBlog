@@ -74,11 +74,11 @@
 					</span>
 					<span class="link">
 						<img src="<?=$BASE_URL; ?>/images/visibility.svg" alt="">
-						21
+						<?=$row["view"]?>
 					</span>
 					<a class="link">
 						<img src="<?=$BASE_URL; ?>/images/message.svg" alt="">
-						4
+						<?=mysqli_num_rows(mysqli_query($con, "SELECT id FROM comments WHERE blog_id=".$row["id"]))?>
 					</a>
 					<span class="link">
 						<img src="<?=$BASE_URL; ?>/images/forums.svg" alt="">
