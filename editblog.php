@@ -27,7 +27,7 @@
 			<div class="page-header">
 				<h2>Редактировать блог</h2>
 			</div>
-			<form class="form" action="api/blog/update.php?id=<?=$id; ?>" method="POST" enctype="multipart/form-data">
+			<form class="form" action="api/blog/update?id=<?=$id; ?>" method="POST" enctype="multipart/form-data">
 				
 				<fieldset class="fieldset">
 					<input class="input" type="text" name="title" placeholder="Заголовок" value="<?=$row['title'];?>">
@@ -90,9 +90,9 @@
 <?php
 
 	} else {
-		header("Location: $BASE_URL/profile.php");
+		header("Location: $BASE_URL/profile");
 	}
 } else {
-	header("Location: $BASE_URL/profile.php");
+	header("Location: $BASE_URL/profile");
 }
 ?>

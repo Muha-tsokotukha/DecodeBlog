@@ -17,7 +17,7 @@
 				<h2>Новый блог</h2>
 			</div>
 			
-			<form class="form" action="<?=$BASE_URL?>/api/blog/add.php" method="POST" enctype="multipart/form-data">
+			<form class="form" action="<?=$BASE_URL?>/api/blog/add" method="POST" enctype="multipart/form-data">
 				
 			<fieldset class="fieldset">
 				<input class="input" type="text" name="title" placeholder="Заголовок">

@@ -5,7 +5,7 @@
 
 	date_default_timezone_set('Asia/Almaty');
 
-    $con = mysqli_connect("localhost", "root", "just2good2betrue", "decodeblog");
+    $con = mysqli_connect("localhost", "root", "", "astana-hub");
 
     if(mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();

@@ -1,3 +1,3 @@
 <?php
-    $BASE_URL = "http://localhost/decodeblog";
+    $BASE_URL = "http://decode-blog.test";
 ?>

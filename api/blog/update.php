@@ -36,8 +36,8 @@
                 mysqli_stmt_execute($prep);
             }
             
-            header("Location: $BASE_URL/profile.php?nickname=".$_SESSION["nickname"]);
+            header("Location: $BASE_URL/profile?nickname=".$_SESSION["nickname"]);
     } else {
-        header("Location: $BASE_URL/editblog.php?id=".$_GET['id']."&error=3");
+        header("Location: $BASE_URL/editblog?id=".$_GET['id']."&error=3");
     }
 ?>

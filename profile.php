@@ -26,7 +26,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h2>Мои блоги</h2>
-			<a class="button" href="<?=$BASE_URL ?>/newblog.php">Новый блог</a>
+			<a class="button" href="<?=$BASE_URL ?>/newblog">Новый блог</a>
 		</div>
 
 		<div class="blogs">
@@ -42,7 +42,7 @@
 			<p>285 постов за все время</p>
 			<a href="" class="button">Редактировать</a>
 
-			<a href="api/user/signout.php" class="button button-danger">Выход</a>
+			<a href="api/user/signout" class="button button-danger">Выход</a>
 		</div>
 	</div>
 </section>	

@@ -1,6 +1,6 @@
 <header class="header container">
 	<div class="header-logo">
-	    <a href="<?=$BASE_URL; ?>/index.php">Decode Blog</a>	
+	    <a href="<?=$BASE_URL; ?>">Decode Blog</a>	
 	</div>
 	<form class="header-search" method="GET">
 		<input name="page" value="1" type="hidden">
@@ -15,7 +15,7 @@
 		
 		if(isset($_SESSION["user_id"])) {
 	?>
-        <a href="<?=$BASE_URL; ?>/profile.php?nickname=<?=$_SESSION["nickname"]?>">
+        <a href="<?=$BASE_URL; ?>/profile?nickname=<?=$_SESSION["nickname"]?>">
             <img class="avatar" src="<?=$BASE_URL; ?>/images/avatar.png" alt="Avatar">
         </a>
 
@@ -23,8 +23,8 @@
 		} else {
 		?>
         <div class="button-group">
-            <a href="<?=$BASE_URL; ?>/register.php" class="button">Регистрация</a>
-            <a href="<?=$BASE_URL; ?>/login.php" class="button">Вход</a>
+            <a href="<?=$BASE_URL; ?>/register" class="button">Регистрация</a>
+            <a href="<?=$BASE_URL; ?>/login" class="button">Вход</a>
         </div>
 
 		<?php

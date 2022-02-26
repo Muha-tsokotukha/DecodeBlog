@@ -14,7 +14,7 @@
         mysqli_stmt_execute($prep);
         $query = mysqli_stmt_get_result($prep);
         if(mysqli_num_rows($query) != 1) {
-            header("Location: $BASE_URL/login.php?error=8");
+            header("Location: $BASE_URL/login?error=8");
             exit();
         }
 
@@ -23,10 +23,10 @@
         session_start();
         $_SESSION["user_id"] = $row["id"];
         $_SESSION["nickname"] = $row["nickname"];
-        header("Location: $BASE_URL/profile.php?nickname=".$row["nickname"]);
+        header("Location: $BASE_URL/profile?nickname=".$row["nickname"]);
 
     } else {
-        header("Location: $BASE_URL/login.php?error=7");
+        header("Location: $BASE_URL/login?error=7");
     }
 
 ?>

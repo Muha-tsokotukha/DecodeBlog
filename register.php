@@ -10,7 +10,7 @@
 	<section class="container page">
 		<div class="auth-form">
             <h1>Регистрация</h1>
-			<form class="form" action="api/user/signup.php" method="POST">
+			<form class="form" action="api/user/signup" method="POST">
                 <fieldset class="fieldset">
                     <input class="input" type="text" name="email" placeholder="Введите email">
                 </fieldset>

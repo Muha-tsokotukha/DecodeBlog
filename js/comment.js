@@ -8,7 +8,7 @@ const textarea = document.getElementById("comment-text");
 const addComment = document.getElementById("add-comment");
 
 function getComments(id){
-    axios.get(base_url+"/api/comment/list.php?id=" + id).then(res=>{
+    axios.get(base_url+"/api/comment/list?id=" + id).then(res=>{
         showComments(res.data);
     })
 }
@@ -42,7 +42,7 @@ getComments(id);
 
 addComment.onclick = function() {
 
-    axios.post(base_url + "/api/comment/add.php", {
+    axios.post(base_url + "/api/comment/add", {
         text: textarea.value,
         blog_id: id
     }).then(res=> {
@@ -69,7 +69,7 @@ addComment.onclick = function() {
     })
 }
 function removeComment(commentId){
-    axios.delete(base_url + "/api/comment/delete.php?id="+commentId).then(res=>{
+    axios.delete(base_url + "/api/comment/delete?id="+commentId).then(res=>{
         // document.getElementById("comment-" + commentId).remove();
         getComments(id);
     });

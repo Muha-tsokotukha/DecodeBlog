@@ -9,7 +9,7 @@ let page = 0;
 
 function getBlogs(){
     inProgress = true;
-    axios.get(`${base_url}/api/blog/list.php?nickname=${nickname}&page=${page}`).then(res=>{
+    axios.get(`${base_url}/api/blog/list?nickname=${nickname}&page=${page}`).then(res=>{
         showBlogs(res.data);
         inProgress = false;
     });
@@ -31,8 +31,8 @@ function showBlogs(blogs){
 						Еще
 
 						<ul class="dropdown">
-							<li> <a href="${base_url}/editblog.php?id=${blogs[i].id}">Редактировать</a> </li>
-							<li><a href="${base_url}/api/blog/delete.php?id=${blogs[i].id}" class="danger">Удалить</a></li>
+							<li> <a href="${base_url}/editblog?id=${blogs[i].id}">Редактировать</a> </li>
+							<li><a href="${base_url}/api/blog/delete?id=${blogs[i].id}" class="danger">Удалить</a></li>
 						</ul>
 					</span>
             `
@@ -56,7 +56,7 @@ function showBlogs(blogs){
 					</span>
 					<span class="link">
 						<img src="${base_url}/images/visibility.svg" alt="">
-						${blogs[i].view}
+						${blogs[i].views}
 					</span>
 					<a class="link">
 						<img src="${base_url}/images/message.svg" alt="">

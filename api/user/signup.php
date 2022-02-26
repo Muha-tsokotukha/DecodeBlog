@@ -18,7 +18,7 @@
           $password = $_POST["password"];
 
         if($_POST["password"] != $_POST["password2"]) {
-            header("Location: $BASE_URL/register.php?error=5");
+            header("Location: $BASE_URL/register?error=5");
             exit();
         }
 
@@ -28,7 +28,7 @@
         $query = mysqli_stmt_get_result($prep);
 
         if(mysqli_num_rows($query) > 0) {
-            header("Location: $BASE_URL/register.php?error=6");
+            header("Location: $BASE_URL/register?error=6");
             exit();
         }
 
@@ -38,11 +38,11 @@
         mysqli_stmt_bind_param($prep1, "ssss", $email, $full_name, $nickname, $hash);
         mysqli_stmt_execute($prep1);
 
-        header("Location: $BASE_URL/login.php");
+        header("Location: $BASE_URL/login");
 
       } else {
 
-        header("Location: $BASE_URL/register.php?error=4");
+        header("Location: $BASE_URL/register?error=4");
 
       }
 

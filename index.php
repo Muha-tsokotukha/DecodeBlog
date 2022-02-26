@@ -83,7 +83,7 @@
 			<div class="blog-item">
 				<img class="blog-item--img" src="<?=$BASE_URL; ?>/<?=$row["img"]; ?>" alt="">
 				<div class="blog-header">
-					<h3><a href="blog-details.php/?id=<?=$row["id"]?>"><?=$row["title"]; ?></a></h3>
+					<h3><a href="blog-details?id=<?=$row["id"]?>"><?=$row["title"]; ?></a></h3>
 				</div>
 				<p class="blog-desc">
 					<?=$row["description"]; ?>
@@ -96,7 +96,7 @@
 					</span>
 					<span class="link">
 						<img src="<?=$BASE_URL; ?>/images/visibility.svg" alt="">
-						<?=$row["view"]?>
+						<?=$row["views"]?>
 					</span>
 					<a class="link">
 						<img src="<?=$BASE_URL; ?>/images/message.svg" alt="">
@@ -106,7 +106,7 @@
 						<img src="<?=$BASE_URL; ?>/images/forums.svg" alt="">
 						<?=$row["name"] ?>
 					</span>
-					<a class="link" href="<?=$BASE_URL; ?>/profile.php?nickname=<?=$row["nickname"] ?>">
+					<a class="link" href="<?=$BASE_URL; ?>/profile?nickname=<?=$row["nickname"] ?>">
 						<img src="<?=$BASE_URL; ?>/images/person.svg" alt="">
 						
 						<?=$row["nickname"] ?>

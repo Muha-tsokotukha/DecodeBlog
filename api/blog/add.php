@@ -26,8 +26,8 @@
                 mysqli_stmt_bind_param($prep, "ssii", $title, $desc, $user_id, $cat_id);
                 mysqli_stmt_execute($prep);
             }
-            header("Location: $BASE_URL/profile.php?nickname=".$_SESSION["nickname"]);
+            header("Location: $BASE_URL/profile?nickname=".$_SESSION["nickname"]);
     } else {
-        header("Location: $BASE_URL/newblog.php?error=3");
+        header("Location: $BASE_URL/newblog?error=3");
     }
 ?>

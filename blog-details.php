@@ -26,7 +26,7 @@
 
 <?php 
 	if( (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != $blog["author_id"]) || !isset($_SESSION["user_id"])  ){
-		$update = mysqli_query($con, "UPDATE blogs SET view=(view+1) WHERE id=".$blog["id"] );
+		$update = mysqli_query($con, "UPDATE blogs SET views=(views+1) WHERE id=".$blog["id"] );
 	}
 ?>
 
@@ -48,7 +48,7 @@
 					</span>
 					<span class="link">
 						<img src="<?=$BASE_URL; ?>/images/visibility.svg" alt="">
-						<?=$blog["view"]?>
+						<?=$blog["views"]?>
 					</span>
 					<a class="link">
 						<img src="<?=$BASE_URL; ?>/images/message.svg" alt="">
@@ -93,7 +93,7 @@
 			else{
 		?>
 		<span class="comment-warning">
-                Чтобы оставить комментарий <a href="register.php">зарегистрируйтесь</a> , или  <a href="login.php">войдите</a>  в аккаунт.
+                Чтобы оставить комментарий <a href="register">зарегистрируйтесь</a> , или  <a href="login">войдите</a>  в аккаунт.
         </span>
 		<?php }?>
 	</div>
